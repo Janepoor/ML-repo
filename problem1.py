@@ -1,6 +1,7 @@
-from io_handling import FileOutputter
 import sys
 import numpy as np
+inputfile=sys.argv[1]
+outputfile=sys.argv[2]
 
 
 class Perceptron:
@@ -39,7 +40,12 @@ class Perceptron:
         self.labelset.sort()
         for (x, y) in zip(training_set, d):
             self.fit_sample(x, y)
+
+        #open(outputfile, "w") as f:
+
         self.outputter.process(self, training_set, d, self.labelset)
+
+
 
     def score(self, data, labels):
         r, w = self.predict_all(data, labels)
@@ -47,13 +53,19 @@ class Perceptron:
         return (r/(r+w))
 
 
+class Outputter(object):
+    def process(self, p: Perceptron, data: np.array, expected_labels: np.array, labels: np.array):
+        self.fo.write("%d, %d, %d\n"%(p.weights[1], p.weights[2], p.weights[0]))
+        #self.fo.write
 
+    def __init__(self, file_path):
+        super().__init__()
+        self.fo = open(file_path, "w")
 def main():
     input_file=sys.argv[1]
     output_file=sys.argv[2]
     raw_data = np.loadtxt(input_file, delimiter=',')
-    p = Perceptron(FileOutputter(output_file))
-
+    p = Perceptron(Outputter(output_file))
     data = raw_data[:, [0, 1]]
     labels = raw_data[:, [2]].flatten()
     row_number = raw_data.shape[0]
@@ -62,15 +74,11 @@ def main():
     bias_column.shape = (row_number, 1)
     data = np.hstack((bias_column, data))
 
-
     while True:
         p.run(data, labels)
         r,w = p.predict_all(data, labels)
         if w == 0:
             break
-
     return 0
-
-
 if __name__ == "__main__":
     main()

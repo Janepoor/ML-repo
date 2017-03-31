@@ -5,6 +5,7 @@ import sys
 from sklearn.preprocessing import scale
 from mpl_toolkits.mplot3d import Axes3D
 
+
 import matplotlib.pyplot as plt
 
 def compute_cost(X,y,b_):
@@ -51,6 +52,17 @@ def main():
             # plt.plot(costhist)
             # plt.show()
 
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.scatter(raw_data[:, [0]], raw_data[:, [1]], raw_data[:, [2]])
+            x_ = np.arange(-3, 3)
+            y_ = np.arange(-2, 4)
+            x_, y_ = np.meshgrid(x_, y_)
+            z_ = b_[0, 0] + b_[1, 0] * x_ + b_[2, 0] * y_
+            ax.plot_surface(x_, y_, z_, color='r')
+            plt.show()
+
+
         my_eta = 0.6
         my_iter = 80
         # print("eta : {}".format(my_eta))
@@ -62,15 +74,30 @@ def main():
         f.write("{},{},{},{},{}\n".format(my_eta, my_iter, b_[0, 0], b_[1, 0], b_[2, 0]))
         #plt.plot(costhist)
 
-        fig =plt.figure()
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(raw_data[:, [0]], raw_data[:, [1]], raw_data[:, [2]])
+        x_ = np.arange(-3, 3)
+        y_ = np.arange(-2, 4)
+        x_, y_ = np.meshgrid(x_, y_)
+        z_ = b_[0, 0] + b_[1, 0] * x_ + b_[2, 0] * y_
+
+        ax.plot_surface(x_, y_, z_, color='r')
+        plt.show()
+
+
+
+    """ fig =plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(raw_data[:, [0]],raw_data[:, [1]],raw_data[:, [2]])
+
         x,y= np.meshgrid(np.arange(-3,3),np.arange(-2,4))
+
         z= b_[0, 0] +b_[1, 0]*x +b_[2, 0]*y
         # z= 0.0002 +0.8767*x +0.0093*y
         ax.plot_surface(x,y,z)
 
-        plt.show()
+        plt.show()"""
 
 
 if __name__ == "__main__":
