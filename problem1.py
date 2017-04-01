@@ -42,7 +42,6 @@ class Perceptron:
             self.fit_sample(x, y)
 
         #open(outputfile, "w") as f:
-
         self.outputter.process(self, training_set, d, self.labelset)
 
 

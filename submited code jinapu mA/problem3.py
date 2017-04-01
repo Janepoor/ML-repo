@@ -53,8 +53,6 @@ def svm_polynomial(Xtrain,Xtest,ytrain, ytest):
     with open('output3.csv',"a") as f:
         f.write("{},{},{}\n".format("svm_polynomial",  grid_poly.best_score_,grid_poly.score(Xtest, ytest)) )
 
-
-
 def svm_rbf(Xtrain,Xtest,ytrain, ytest):
     C_range = [0.1, 0.5, 1, 5, 10, 50, 100]
     gamma_range = [0.1, 0.5, 1, 3, 6, 10]
@@ -90,7 +88,6 @@ def knn(Xtrain,Xtest,ytrain, ytest):
     with open('output3.csv',"a") as f:
         f.write("{},{},{}\n".format("KNN",  grid_kNN.best_score_,grid_kNN.score(Xtest, ytest)) )
 
-
 def decision_tree(Xtrain,Xtest,ytrain, ytest):
     ####decision tree
     DT = DecisionTreeClassifier()
@@ -102,8 +99,6 @@ def decision_tree(Xtrain,Xtest,ytrain, ytest):
     with open('output3.csv',"a") as f:
         f.write("{},{},{}\n".format("decision_tree",  grid_DT.best_score_,grid_DT.score(Xtest, ytest)) )
 
-
-
 def random_forest(Xtrain,Xtest,ytrain, ytest):
     ####Random forest
     RF = RandomForestClassifier()
@@ -114,7 +109,6 @@ def random_forest(Xtrain,Xtest,ytrain, ytest):
           % (grid_RF.best_params_, grid_RF.best_score_))
     with open('output3.csv',"a") as f:
         f.write("{},{},{}\n".format("random_forest",  grid_RF.best_score_,grid_RF.score(Xtest, ytest)) )
-        
 
 
 def main():
