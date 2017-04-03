@@ -114,7 +114,7 @@ def random_forest(Xtrain,Xtest,ytrain, ytest):
           % (grid_RF.best_params_, grid_RF.best_score_))
     with open('output3.csv',"a") as f:
         f.write("{},{},{}\n".format("random_forest",  grid_RF.best_score_,grid_RF.score(Xtest, ytest)) )
-        
+
 
 
 def main():
